@@ -1,2 +1,2 @@
 # simple-cf-template
-Cognito Sample CloudFormation Template
+Sample CloudFormation Template
