@@ -1,0 +1,23 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "s3-private-bucket cf template",
+    "Parameters": {
+        "BucketName": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "s3PrivateBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "PublicAccessBlockConfiguration": {
+                    "BlockPublicAcls": "True",
+                    "BlockPublicPolicy": "True",
+                    "IgnorePublicAcls": "True",
+                    "RestrictPublicBuckets": "True"
+                },
+                "BucketName" : { "Ref" : "BucketName" }
+            }
+        }
+    }
+}
