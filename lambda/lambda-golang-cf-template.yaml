@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: lambda golang-runtime cf template
+Parameters:
+  LambdaFunctionName:
+    Type: String
+Resources:
+  LambdaExecutionRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+  LambdaFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Description: hello world by golang
+      FunctionName: !Ref LambdaFunctionName
+      Handler: main
+      Code: ./src/handler.zip
+      Architectures:
+        - x86_64
+      Role: !GetAtt 
+        - LambdaExecutionRole
+        - Arn
+      Runtime: go1.x
+      Timeout: 300
